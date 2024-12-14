@@ -1,64 +1,89 @@
 'use client';
-import { motion } from "framer-motion";
+import { useRef, useEffect, useState } from "react";
 import { FileText, Github, Instagram, Linkedin, Twitter, UserPlus } from 'lucide-react';
 import Link from "next/link";
-import { useState } from "react";
+import { gsap } from "gsap";
+
+type Logo = {
+  id: number;
+  icon: JSX.Element;
+  text: string;
+  link: string;
+};
 
 export default function Docker() {
-  const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
 
-  const logos = [
-    { id: 1, icon: <Instagram size={24} />, text: "Instagram", link: "https://www.instagram.com/sidlakhani_"},
-    { id: 2, icon: <Twitter size={24} />, text: "Twitter", link: "https://twitter.com/sidlakhani_"},
-    { id: 3, icon: <Linkedin size={24} />, text: "LinkedIn", link: "https://www.linkedin.com/in/siddhesh-lakhani/"},
+  const logos: Logo[] = [
+    { id: 1, icon: <Instagram size={24} />, text: "Instagram", link: "https://www.instagram.com/sidlakhani_" },
+    { id: 2, icon: <Twitter size={24} />, text: "Twitter", link: "https://twitter.com/sidlakhani_" },
+    { id: 3, icon: <Linkedin size={24} />, text: "LinkedIn", link: "https://www.linkedin.com/in/siddhesh-lakhani/" },
     { id: 4, icon: <Github size={24} />, text: "Github", link: "https://github.com/sid-lakhani" },
     { id: 5, icon: <FileText size={24} />, text: "Resume", link: "/resume" },
     { id: 6, icon: <UserPlus size={24} />, text: "Hire me", link: "/contact" },
   ];
 
+  const handleMouseEnter = (index: number, element: HTMLDivElement) => {
+    setHoveredIndex(index);
+    gsap.to(element, { scale: 1.2, duration: 0.3, ease: "power3.out" });
+  };
+
+  const handleMouseLeave = (element: HTMLDivElement) => {
+    setHoveredIndex(null);
+    gsap.to(element, { scale: 1, duration: 0.3, ease: "power3.out" });
+  };
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    const icons = containerRef.current.querySelectorAll<HTMLDivElement>(".icon");
+
+    icons.forEach((icon, index) => {
+      gsap.to(icon, {
+        x: hoveredIndex === null
+          ? 0
+          : index < hoveredIndex
+          ? -20
+          : index > hoveredIndex
+          ? 20
+          : 0,
+        duration: 0.5,
+        ease: "power3.out",
+      });
+    });
+  }, [hoveredIndex]);
+
   return (
-    <div className="max-h-40 max-w-screen-sm flex justify-center items-center relative">
-      <motion.div className="flex space-x-6 relative z-10">
+    <div className="max-h-40 max-w-screen-sm flex justify-center items-center relative" ref={containerRef}>
+      <div className="flex space-x-6 relative z-10">
         {logos.map((logo, index) => (
-          <motion.div
+          <div
             key={logo.id}
-            onHoverStart={() => setHoveredIndex(index)}
-            onHoverEnd={() => setHoveredIndex(null)}
-            whileHover={{ scale: 1.5 }}
-            animate={{
-              x: hoveredIndex === null
-                ? 0
-                : hoveredIndex === index
-                ? 0
-                : index < hoveredIndex
-                ? -20
-                : 20,
-            }}
-            transition={{
-              type: "spring",
-              stiffness: 150,
-              damping: 15,
-            }}
-            className="relative flex justify-center items-center"
+            className="relative flex justify-center items-center icon"
+            onMouseEnter={(e) => handleMouseEnter(index, e.currentTarget as HTMLDivElement)}
+            onMouseLeave={(e) => handleMouseLeave(e.currentTarget as HTMLDivElement)}
           >
-            <Link href={logo.link}
-              className={`w-12 h-12 ${hoveredIndex === index ? "bg-gray-800" : "bg-gray-800/20"} rounded-full flex justify-center items-center shadow-lg`}
+            <Link
+              href={logo.link}
+              className={`w-16 h-16 ${hoveredIndex === index ? "bg-gray-800" : "bg-gray-800/20"} rounded-full flex justify-center items-center shadow-lg`}
             >
               {logo.icon}
             </Link>
             {hoveredIndex === index && (
-              <motion.div
-                className="absolute top-12 text-white text-xs"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.3 }}
+              <div
+                className="absolute top-[4.5rem] text-white text-xs"
+                style={{
+                  opacity: hoveredIndex === index ? 1 : 0,
+                  transition: "opacity 0.3s ease",
+                }}
               >
                 {logo.text}
-              </motion.div>
+              </div>
             )}
-          </motion.div>
+          </div>
         ))}
-      </motion.div>
+      </div>
     </div>
   );
 }
