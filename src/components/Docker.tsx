@@ -1,6 +1,13 @@
-'use client';
+"use client";
 import { useRef, useEffect, useState } from "react";
-import { FileText, Github, Instagram, Linkedin, Twitter, UserPlus } from 'lucide-react';
+import {
+  FileText,
+  Github,
+  Instagram,
+  Linkedin,
+  Twitter,
+  UserPlus,
+} from "lucide-react";
 import Link from "next/link";
 import { gsap } from "gsap";
 
@@ -16,10 +23,30 @@ export default function Docker() {
   const containerRef = useRef<HTMLDivElement | null>(null);
 
   const logos: Logo[] = [
-    { id: 1, icon: <Instagram size={24} />, text: "Instagram", link: "https://www.instagram.com/sidlakhani_" },
-    { id: 2, icon: <Twitter size={24} />, text: "Twitter", link: "https://twitter.com/sidlakhani_" },
-    { id: 3, icon: <Linkedin size={24} />, text: "LinkedIn", link: "https://www.linkedin.com/in/siddhesh-lakhani/" },
-    { id: 4, icon: <Github size={24} />, text: "Github", link: "https://github.com/sid-lakhani" },
+    {
+      id: 1,
+      icon: <Instagram size={24} />,
+      text: "Instagram",
+      link: "https://www.instagram.com/sidlakhani_",
+    },
+    {
+      id: 2,
+      icon: <Twitter size={24} />,
+      text: "Twitter",
+      link: "https://twitter.com/sidlakhani_",
+    },
+    {
+      id: 3,
+      icon: <Linkedin size={24} />,
+      text: "LinkedIn",
+      link: "https://www.linkedin.com/in/siddhesh-lakhani/",
+    },
+    {
+      id: 4,
+      icon: <Github size={24} />,
+      text: "Github",
+      link: "https://github.com/sid-lakhani",
+    },
     { id: 5, icon: <FileText size={24} />, text: "Resume", link: "/resume" },
     { id: 6, icon: <UserPlus size={24} />, text: "Hire me", link: "/contact" },
   ];
@@ -37,17 +64,19 @@ export default function Docker() {
   useEffect(() => {
     if (!containerRef.current) return;
 
-    const icons = containerRef.current.querySelectorAll<HTMLDivElement>(".icon");
+    const icons =
+      containerRef.current.querySelectorAll<HTMLDivElement>(".icon");
 
     icons.forEach((icon, index) => {
       gsap.to(icon, {
-        x: hoveredIndex === null
-          ? 0
-          : index < hoveredIndex
-          ? -20
-          : index > hoveredIndex
-          ? 20
-          : 0,
+        x:
+          hoveredIndex === null
+            ? 0
+            : index < hoveredIndex
+            ? -20
+            : index > hoveredIndex
+            ? 20
+            : 0,
         duration: 0.5,
         ease: "power3.out",
       });
@@ -55,35 +84,59 @@ export default function Docker() {
   }, [hoveredIndex]);
 
   return (
-    <div className="max-h-40 max-w-screen-sm flex justify-center items-center relative" ref={containerRef}>
-      <div className="flex space-x-6 relative z-10">
+    <>
+      <div
+        className="max-h-40 max-w-screen-sm md:flex justify-center items-center relative hidden"
+        ref={containerRef}
+      >
+        <div className="flex space-x-6 relative z-10">
+          {logos.map((logo, index) => (
+            <div
+              key={logo.id}
+              className="relative flex justify-center items-center icon"
+              onMouseEnter={(e) =>
+                handleMouseEnter(index, e.currentTarget as HTMLDivElement)
+              }
+              onMouseLeave={(e) =>
+                handleMouseLeave(e.currentTarget as HTMLDivElement)
+              }
+            >
+              <Link
+                href={logo.link}
+                className={`w-16 h-16 ${
+                  hoveredIndex === index ? "bg-gray-800" : "bg-gray-800/20"
+                } rounded-full flex justify-center items-center shadow-lg`}
+              >
+                {logo.icon}
+              </Link>
+              {hoveredIndex === index && (
+                <div
+                  className="absolute top-[4.5rem] text-white text-xs"
+                  style={{
+                    opacity: hoveredIndex === index ? 1 : 0,
+                    transition: "opacity 0.3s ease",
+                  }}
+                >
+                  {logo.text}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className="flex justify-center items-center space-x-6 md:hidden">
         {logos.map((logo, index) => (
-          <div
-            key={logo.id}
-            className="relative flex justify-center items-center icon"
-            onMouseEnter={(e) => handleMouseEnter(index, e.currentTarget as HTMLDivElement)}
-            onMouseLeave={(e) => handleMouseLeave(e.currentTarget as HTMLDivElement)}
-          >
+          <div key={logo.id} className="relative flex justify-center items-center">
             <Link
               href={logo.link}
-              className={`w-16 h-16 ${hoveredIndex === index ? "bg-gray-800" : "bg-gray-800/20"} rounded-full flex justify-center items-center shadow-lg`}
+              className={`w-10 h-10 bg-gray-800/20 rounded-full p-2 flex justify-center items-center shadow-lg`}
             >
               {logo.icon}
             </Link>
-            {hoveredIndex === index && (
-              <div
-                className="absolute top-[4.5rem] text-white text-xs"
-                style={{
-                  opacity: hoveredIndex === index ? 1 : 0,
-                  transition: "opacity 0.3s ease",
-                }}
-              >
-                {logo.text}
-              </div>
-            )}
+            {/* <p className="absolute top-12 text-white text-xs whitespace-nowrap">{logo.text}</p> */}
           </div>
         ))}
       </div>
-    </div>
+    </>
   );
 }

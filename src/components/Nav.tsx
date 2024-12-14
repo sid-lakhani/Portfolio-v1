@@ -4,13 +4,11 @@ import { Froles } from "@/lib/font";
 
 export default function Nav() {
   return (
-    <div className="bottom-0 left-0 z-50 flex flex-row justify-between w-full p-4 text-white items-center">
-      <div className={`text-[5.5rem] ${Froles.className} text-white tracking-wide`}>
+    <div className="top-0 md:bottom-0 left-0 z-50 flex flex-col md:flex-row md:gap-0 gap-4 md:justify-between w-full p-4 md:pb-12 text-white items-center">
+      <p className={`text-6xl md:text-[5.5rem] ${Froles.className} text-white tracking-wide whitespace-nowrap`}>
         Siddhesh Lakhani
-      </div>
-      <div>
+      </p>
       <Docker />
-      </div>
     </div>
   );
 }

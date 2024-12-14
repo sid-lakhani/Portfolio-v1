@@ -4,7 +4,7 @@ import Nav from './Nav';
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen min-w-screen flex flex-col-reverse items-start justify-between pt-4 px-8 bg-primary overflow-hidden">
+    <div className="min-h-screen min-w-screen flex flex-col gap-4 md:gap-0 md:flex-col-reverse items-start md:justify-between md:pt-4 px-8 bg-primary overflow-hidden">
       <Nav />
       <div className="relative w-full h-[60vh] md:h-[75vh]">
         <video
@@ -17,7 +17,7 @@ export default function LandingPage() {
           className="absolute inset-0 w-full h-full object-cover md:object-fill rounded-3xl"
         />
         <div
-          className={`absolute z-20 left-1/2 transform -translate-x-1/2 top-[16dvh] text-overlay ${Froles.className} text-2xl md:text-4xl lg:text-[5.5rem] tracking-wider font-bold whitespace-nowrap`}
+          className={`absolute z-20 left-1/2 transform -translate-x-1/2 top-[16dvh] text-overlay ${Froles.className} text-center text-4xl md:text-4xl lg:text-[5.5rem] tracking-wider font-bold md:whitespace-nowrap`}
         >
           <p>Welcome to My Portfolio!</p>
         </div>
@@ -29,7 +29,7 @@ export default function LandingPage() {
           alt="hero"
           width={800}
           height={800}
-          className="max-h-[60vh] md:max-h-[75vh]"
+          className="max-h-[50vh] md:max-h-[60vh] lg:max-h-[75vh]"
         />
       </div>
     </div>
