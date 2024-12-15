@@ -13,7 +13,7 @@ import { gsap } from "gsap";
 
 type Logo = {
   id: number;
-  icon: JSX.Element;
+  icon: JSX.Element | null;
   text: string;
   link: string;
 };
