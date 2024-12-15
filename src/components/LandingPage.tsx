@@ -1,5 +1,5 @@
 "use client";
-import { Froles } from "@/lib/font";
+import { Chiro, Froles, Gristela, playfair, poppins } from "@/lib/font";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -24,8 +24,8 @@ export default function LandingPage() {
     initialTL
       .fromTo(
         textRef.current,
-        { scale: 2, opacity: 0, color: "black" },
-        { scale: 1, opacity: 1, duration: 1, color: "#0B1120", ease: "none" }
+        { opacity: 0.8 },
+        { opacity: 1, duration: 1, ease: "none" }
       )
       .fromTo(
         vidRef.current,
@@ -41,7 +41,7 @@ export default function LandingPage() {
       )
       .fromTo(
         navRef.current,
-        { opacity: 0, y: 50 },
+        { opacity: 0, y: -50 },
         { opacity: 1, y: 0, duration: 1.5, ease: "power2.out" },
         "a"
       )
@@ -88,7 +88,7 @@ export default function LandingPage() {
       scrollTrigger: {
         trigger: containerRef.current,
         start: "top top",
-        end: "+=40%",
+        end: "+=80%",
         scrub: true,
         // markers: true,
       },
@@ -107,7 +107,7 @@ export default function LandingPage() {
         vidRef.current,
         {
           scale: 0.4,
-          y: 400,
+          y: 300,
         },
         "c"
       )
@@ -144,9 +144,9 @@ export default function LandingPage() {
         />
         <div
           ref={textRef}
-          className={`absolute z-20 left-1/2 transform -translate-x-1/2 top-[16dvh] ${Froles.className} text-center text-4xl md:text-4xl lg:text-[5.5rem] tracking-wider font-bold md:whitespace-nowrap`}
+          className={`absolute z-20 left-1/2 transform -translate-x-1/2 top-[16dvh] ${Chiro.className} text-center text-4xl md:text-4xl lg:text-[5.5rem] tracking-wider font-bold md:whitespace-nowrap`}
         >
-          <p>Welcome to My Portfolio!</p>
+          <p>Transforming Visions into Reality.</p>
         </div>
       </div>
 

@@ -65,118 +65,6 @@ export default function Docker() {
   const logos: Logo[] = [
     {
       id: 1,
-      icon: null,
-      text: "About",
-      link: "#about",
-    },
-    {
-      id: 2,
-      icon: null,
-      text: "Projects",
-      link: "#projects",
-    },
-    {
-      id: 3,
-      icon: null,
-      text: "Skills",
-      link: "#skills",
-    },
-    {
-      id: 4,
-      icon: <Github size={24} />,
-      text: "GitHub",
-      link: "https://github.com/sid-lakhani",
-    },
-    {
-      id: 5,
-      icon: <Linkedin size={24} />,
-      text: "LinkedIn",
-      link: "https://www.linkedin.com/in/siddhesh-lakhani/",
-    },
-    {
-      id: 6,
-      icon: <Instagram size={24} />,
-      text: "Instagram",
-      link: "https://www.instagram.com/sidlakhani_",
-    },
-    {
-      id: 7,
-      icon: <Twitter size={24} />,
-      text: "Twitter",
-      link: "https://twitter.com/sidlakhani_",
-    },
-    { id: 8, icon: <FileText size={24} />, text: "Resume", link: "/resume" },
-    { id: 9, icon: <UserPlus size={24} />, text: "Contact", link: "/contact" },
-  ];
-
-  return (
-    <>
-      <div
-        className="max-h-40 max-w-screen-sm md:flex justify-center items-center relative hidden"
-        ref={containerRef}
-      >
-        <div className="flex space-x-6 relative z-10">
-          {logos.map((logo, index) => (
-            <div
-              key={logo.id}
-              className="relative flex justify-center items-center icon"
-              onMouseEnter={(e) =>
-                handleMouseEnter(index, e.currentTarget as HTMLDivElement)
-              }
-              onMouseLeave={(e) =>
-                handleMouseLeave(e.currentTarget as HTMLDivElement)
-              }
-            >
-              <Link
-                href={logo.link}
-                className={`w-16 h-16 ${
-                  hoveredIndex === index ? "bg-gray-800" : "bg-gray-800/20"
-                } rounded-full flex justify-center items-center shadow-lg`}
-              >
-                {logo.icon ? logo.icon : logo.text}
-              </Link>
-              {hoveredIndex === index && logo.text && (
-                <div
-                  className="absolute top-[4.5rem] text-white text-xs"
-                  style={{
-                    opacity: hoveredIndex === index ? 1 : 0,
-                    transition: "opacity 0.3s ease",
-                  }}
-                >
-                  {logo.icon? logo.text : null}
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
-      </div>
-      <div className="flex justify-center items-center space-x-6 md:hidden">
-        {logos.map((logo, index) => (
-          <div
-            key={logo.id}
-            className="relative flex justify-center items-center"
-          >
-            <Link
-              href={logo.link}
-              className={`w-10 h-10 bg-gray-800/20 rounded-full p-2 flex justify-center items-center shadow-lg`}
-            >
-              {logo.icon ? logo.icon : null}
-            </Link>
-          </div>
-        ))}
-      </div>
-    </>
-  );
-}
-
-
-export function DockerHome() {
-  const { hoveredIndex, containerRef, handleMouseEnter, handleMouseLeave } =
-    useDockerFunctionality();
-
-  const logos: Logo[] = [
-    {
-      id: 1,
       icon: <Github size={24} />,
       text: "Github",
       link: "https://github.com/sid-lakhani",
@@ -223,7 +111,7 @@ export function DockerHome() {
             >
               <Link
                 href={logo.link}
-                className={`w-16 h-16 ${
+                className={`w-12 h-12 ${
                   hoveredIndex === index ? "bg-gray-800" : "bg-gray-800/20"
                 } rounded-full flex justify-center items-center shadow-lg`}
               >
@@ -231,7 +119,7 @@ export function DockerHome() {
               </Link>
               {hoveredIndex === index && (
                 <div
-                  className="absolute top-[4.5rem] text-white text-xs"
+                  className="absolute top-[3.5rem] text-white text-xs"
                   style={{
                     opacity: hoveredIndex === index ? 1 : 0,
                     transition: "opacity 0.3s ease",
