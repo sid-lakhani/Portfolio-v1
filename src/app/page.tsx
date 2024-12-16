@@ -1,5 +1,6 @@
 import About from "@/components/About";
 import LandingPage from "@/components/LandingPage";
+import Projects from "@/components/Projects";
 import { SmoothScrollWrapper } from "@/components/SmoothScrollWrapper";
 
 export default function Home() {
@@ -7,6 +8,7 @@ export default function Home() {
     <SmoothScrollWrapper>
       <LandingPage />
       <About />
+      {/* <Projects /> */}
     </SmoothScrollWrapper>
   );
 }

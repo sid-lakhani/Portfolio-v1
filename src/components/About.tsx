@@ -1,16 +1,18 @@
 "use client";
+import { Gristela, playfair } from "@/lib/font";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useRef } from "react";
 import Nav from "./Nav";
-import { Chiro, Froles, Gristela, playfair, poppins } from "@/lib/font";
 
 export default function About() {
   gsap.registerPlugin(ScrollTrigger);
   const containerRef = useRef<HTMLDivElement>(null);
   const navRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
+  const descRef = useRef<HTMLDivElement>(null);
+  const bodyRef = useRef<HTMLDivElement>(null);
   const aboutRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
@@ -33,10 +35,11 @@ export default function About() {
 
     const scrollTL2 = gsap.timeline({
       scrollTrigger: {
-        trigger: containerRef.current,
-        start: "top 10%",
+        trigger: bodyRef.current,
+        start: "top top",
         end: "+=30%",
         scrub: true,
+        pin: true,
         // markers: true,
       },
     });
@@ -52,7 +55,7 @@ export default function About() {
         "a"
       )
       .fromTo(
-        aboutRef.current,
+        descRef.current,
         {
           opacity: 0,
           scale: 1,
@@ -72,10 +75,16 @@ export default function About() {
       ref={containerRef}
       className="min-h-screen w-full bg-gradient-to-r from-primary-midnight to-primary-dark relative z-40"
     >
-      <div ref={navRef} className="sticky top-0 w-full z-50 bg-primary-midnight shadow-md border-b">
+      <div
+        ref={navRef}
+        className="sticky top-0 w-full z-50 bg-primary-midnight shadow-md border-b"
+      >
         <Nav />
       </div>
-      <div className="flex flex-row items-center justify-evenly h-screen w-full relative px-10">
+      <section
+        ref={bodyRef}
+        className="flex flex-row items-center justify-evenly h-screen w-full relative px-10"
+      >
         <p
           ref={textRef}
           className={`${Gristela.className} text-[6rem] text-white max-w-xl`}
@@ -83,16 +92,14 @@ export default function About() {
           Vision Beyond Limits
         </p>
         <p
-          ref={aboutRef}
+          ref={descRef}
           className={` max-w-md p-4 rounded-[5rem] text-5xl text-white ${playfair.className} tracking-wider`}
         >
           Step into my world, where tech meets imagination and every line of
           code brings a new idea to life!
         </p>
-      </div>
-      <div className="h-screen">
-
-      </div>
+      </section>
+      <section ref={aboutRef} className="flex flex-row items-center justify-evenly h-screen w-full relative px-10">Hi</section>
     </div>
   );
 }
