@@ -1,105 +1,122 @@
 "use client";
-import { Gristela, playfair } from "@/lib/font";
-import { useGSAP } from "@gsap/react";
+import { playfair, poppins } from "@/lib/font";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useRef } from "react";
-import Nav from "./Nav";
+import { useEffect, useRef } from "react";
+import SplitType from "split-type";
+import { useGSAP } from "@gsap/react";
+import Image from "next/image";
 
 export default function About() {
-  gsap.registerPlugin(ScrollTrigger);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const navRef = useRef<HTMLDivElement>(null);
-  const textRef = useRef<HTMLDivElement>(null);
-  const descRef = useRef<HTMLDivElement>(null);
+  const textRef = useRef<HTMLParagraphElement>(null);
   const bodyRef = useRef<HTMLDivElement>(null);
-  const aboutRef = useRef<HTMLDivElement>(null);
+  const imgRef = useRef<HTMLImageElement>(null);
+  const knowRef = useRef<HTMLParagraphElement>(null);
+  gsap.registerPlugin(ScrollTrigger);
 
   useGSAP(() => {
-    if (!containerRef.current) return;
+    if (textRef.current) {
+      // Split the text into words
+      const split = new SplitType(textRef.current, { types: "words" });
 
-    const scrollTL1 = gsap.timeline({
-      scrollTrigger: {
-        trigger: containerRef.current,
-        start: "top 60%",
-        end: "+=20%",
-        scrub: true,
-        // markers: true,
-      },
-    });
-    scrollTL1.fromTo(
-      navRef.current,
-      { opacity: 0 },
-      { opacity: 1, duration: 4, ease: "power2.out" }
-    );
-
-    const scrollTL2 = gsap.timeline({
-      scrollTrigger: {
-        trigger: bodyRef.current,
-        start: "top top",
-        end: "+=30%",
-        scrub: true,
-        pin: true,
-        // markers: true,
-      },
-    });
-
-    scrollTL2
-      .from(
-        textRef.current,
-        {
-          x: 400,
-          duration: 12,
-          ease: "slow",
+      // Timeline for the reveal effect
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: bodyRef.current, // Pin the entire section
+          start: "top top", // Start when section hits the top
+          end: "+=100%", // Scroll for twice the viewport height
+          scrub: true,
+          pin: true,
+          markers: false,
         },
-        "a"
-      )
-      .fromTo(
-        descRef.current,
+      });
+
+      // Animate words opacity
+      tl.fromTo(
+        split.words,
         {
-          opacity: 0,
-          scale: 1,
+          opacity: 0.2,
         },
         {
           opacity: 1,
-          duration: 4,
-          scale: 1.4,
-          ease: "slow",
-        },
-        "a"
-      );
+          duration: 2,
+          stagger: 0.8, // Faster stagger for smoother animation
+        }
+      )
+        .to(
+          textRef.current,
+          {
+            width: "60vh",
+            duration: 15,
+            x: "-10vh",
+          },
+          "a"
+        )
+        .to(
+          imgRef.current,
+          {
+            scale: 1.5,
+            ease: "slow",
+            duration: 15,
+            x: "10vh"
+          },
+          "a"
+        )
+        .to([textRef.current, imgRef.current], {
+          y: "-100vh",
+          opacity: 0.4,
+          duration: 15,
+          delay: 15,
+          ease: "power3.out",
+        })
+        .from(knowRef.current, {
+          opacity: 0,
+          y: "-10vh",
+          duration: 10,
+          ease: "power3.out",
+        });
+    }
   });
 
   return (
-    <div
-      ref={containerRef}
-      className="min-h-screen w-full bg-gradient-to-r from-primary-midnight to-primary-dark relative z-40"
+    <section
+      ref={bodyRef}
+      className="relative flex items-center justify-center h-[100vh] w-full px-10 bg-primary z-50 select-none gap-4"
     >
-      <div
-        ref={navRef}
-        className="sticky top-0 w-full z-50 bg-primary-midnight shadow-md border-b"
+      <p
+        className={`reveal-type text-4xl font-bold ${poppins.className} leading-relaxed text-white text-center`}
+        ref={textRef}
       >
-        <Nav />
+        Hi, I'm Siddhesh Lakhani, a passionate full-stack developer and a
+        Computer Engineering student. I love building intuitive web applications
+        and exploring the latest technologies.
+      </p>
+      <div ref={imgRef} className="h-[300px] w-[300px]">
+        <video
+          src="./clouds.mp4"
+          autoPlay
+          loop
+          muted
+          playsInline
+          aria-hidden="true"
+          className="absolute w-full h-full object-cover rounded-3xl z-0"
+          preload="metadata"
+        />
+        <Image
+          src="./hero.svg"
+          alt="me"
+          width={300}
+          height={300}
+          className="absolute top-10 z-50"
+        />
       </div>
-      <section
-        ref={bodyRef}
-        className="flex flex-row items-center justify-evenly h-screen w-full relative px-10"
+
+      <p
+        ref={knowRef}
+        className={`text-5xl font-bold ${playfair.className} leading-relaxed text-white text-center absolute top-[10vh] capitalize`}
       >
-        <p
-          ref={textRef}
-          className={`${Gristela.className} text-[6rem] text-white max-w-xl`}
-        >
-          Vision Beyond Limits
-        </p>
-        <p
-          ref={descRef}
-          className={` max-w-md p-4 rounded-[5rem] text-5xl text-white ${playfair.className} tracking-wider`}
-        >
-          Step into my world, where tech meets imagination and every line of
-          code brings a new idea to life!
-        </p>
-      </section>
-      <section ref={aboutRef} className="flex flex-row items-center justify-evenly h-screen w-full relative px-10">Hi</section>
-    </div>
+        Get to know me
+      </p>
+    </section>
   );
 }

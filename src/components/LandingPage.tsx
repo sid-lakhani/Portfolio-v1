@@ -7,14 +7,13 @@ import Image from "next/image";
 import { useRef } from "react";
 import { NavHome } from "./Nav";
 
-gsap.registerPlugin(ScrollTrigger);
 
 export default function LandingPage() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const textRef = useRef<HTMLDivElement>(null);
   const vidRef = useRef<HTMLVideoElement>(null);
   const imgRef = useRef<HTMLImageElement>(null);
   const navRef = useRef<HTMLDivElement>(null);
+  gsap.registerPlugin(ScrollTrigger);
 
   useGSAP(() => {
     if (!containerRef.current) return;
@@ -22,11 +21,6 @@ export default function LandingPage() {
     const initialTL = gsap.timeline();
 
     initialTL
-      .fromTo(
-        textRef.current,
-        { opacity: 0.8 },
-        { opacity: 1, duration: 1, ease: "none" }
-      )
       .fromTo(
         vidRef.current,
         { opacity: 0 },
@@ -64,24 +58,11 @@ export default function LandingPage() {
     });
 
     scrollTL1
-      .fromTo(
-        textRef.current,
-        {
-          y: 0,
-          opacity: 1,
-        },
-        {
-          y: -200,
-          opacity: 0,
-        },
-        "b"
-      )
       .to(
         imgRef.current,
         {
-          scale: 1.15,
+          scale: 1.3,
         },
-        "b"
       );
 
     const scrollTL2 = gsap.timeline({
@@ -125,7 +106,7 @@ export default function LandingPage() {
   return (
     <div
       ref={containerRef}
-      className="min-h-screen min-w-screen flex flex-col gap-4 md:gap-0 md:flex-col-reverse items-start md:justify-between md:pt-4 px-8 bg-primary overflow-hidden"
+      className="select-none min-h-screen min-w-screen flex flex-col gap-4 md:gap-0 md:flex-col-reverse items-start md:justify-between md:pt-4 px-8 bg-primary overflow-hidden"
     >
       <div className="w-full z-50" ref={navRef}>
         <NavHome />
@@ -142,12 +123,6 @@ export default function LandingPage() {
           ref={vidRef}
           preload="metadata"
         />
-        <div
-          ref={textRef}
-          className={`absolute z-20 left-1/2 transform -translate-x-1/2 top-[16dvh] ${Chiro.className} text-center text-4xl md:text-4xl lg:text-[5.5rem] tracking-wider font-bold md:whitespace-nowrap`}
-        >
-          <p>Transforming Visions into Reality.</p>
-        </div>
       </div>
 
       <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 z-40 w-full flex justify-center">

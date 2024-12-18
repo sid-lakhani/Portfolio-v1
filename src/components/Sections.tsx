@@ -28,7 +28,7 @@ export default function Sections() {
   return (
     <div className="flex gap-8">
       {sections.map((section) => (
-        <Link href={section.link} key={section.id} className={`text-white text-xl hover:border-b border-white ${poppins.className}`} >
+        <Link href={section.link} key={section.id} className={`text-white text-md hover:border-b border-white ${poppins.className}`} >
           {section.title}
         </Link>
       ))}
