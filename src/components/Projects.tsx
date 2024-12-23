@@ -5,8 +5,9 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useRef } from "react";
 
+gsap.registerPlugin(ScrollTrigger);
+
 export default function Projects() {
-  gsap.registerPlugin(ScrollTrigger);
   const triggerRef = useRef<HTMLDivElement>(null);
   const scrollableRef = useRef<HTMLDivElement>(null);
 

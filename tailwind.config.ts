@@ -14,6 +14,9 @@ export default {
   		testimonial: 'var(--font-playfair_display)'
   	},
   	extend: {
+		backgroundImage: {
+			'gradient-radial': 'radial-gradient(circle, var(--tw-gradient-stops))'
+		},
   		colors: {
   			primary: {
   				DEFAULT: '#0B1120',

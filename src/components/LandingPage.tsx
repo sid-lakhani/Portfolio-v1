@@ -7,13 +7,13 @@ import Image from "next/image";
 import { useRef } from "react";
 import { NavHome } from "./Nav";
 
+gsap.registerPlugin(ScrollTrigger);
 
 export default function LandingPage() {
   const containerRef = useRef<HTMLDivElement>(null);
   const vidRef = useRef<HTMLVideoElement>(null);
   const imgRef = useRef<HTMLImageElement>(null);
   const navRef = useRef<HTMLDivElement>(null);
-  gsap.registerPlugin(ScrollTrigger);
 
   useGSAP(() => {
     if (!containerRef.current) return;

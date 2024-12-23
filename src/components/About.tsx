@@ -6,32 +6,31 @@ import { useEffect, useRef } from "react";
 import SplitType from "split-type";
 import { useGSAP } from "@gsap/react";
 import Image from "next/image";
+import KnowMeCards from "./KnowMeCards";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function About() {
   const textRef = useRef<HTMLParagraphElement>(null);
   const bodyRef = useRef<HTMLDivElement>(null);
   const imgRef = useRef<HTMLImageElement>(null);
   const knowRef = useRef<HTMLParagraphElement>(null);
-  gsap.registerPlugin(ScrollTrigger);
-
+  
   useGSAP(() => {
     if (textRef.current) {
-      // Split the text into words
       const split = new SplitType(textRef.current, { types: "words" });
 
-      // Timeline for the reveal effect
       const tl = gsap.timeline({
         scrollTrigger: {
-          trigger: bodyRef.current, // Pin the entire section
-          start: "top top", // Start when section hits the top
-          end: "+=100%", // Scroll for twice the viewport height
+          trigger: bodyRef.current, 
+          start: "top top", 
+          end: "+=100%", 
           scrub: true,
           pin: true,
           markers: false,
         },
       });
 
-      // Animate words opacity
       tl.fromTo(
         split.words,
         {
@@ -40,7 +39,7 @@ export default function About() {
         {
           opacity: 1,
           duration: 2,
-          stagger: 0.8, // Faster stagger for smoother animation
+          stagger: 0.8, 
         }
       )
         .to(
@@ -58,7 +57,7 @@ export default function About() {
             scale: 1.5,
             ease: "slow",
             duration: 15,
-            x: "10vh"
+            x: "10vh",
           },
           "a"
         )
@@ -110,13 +109,14 @@ export default function About() {
           className="absolute top-10 z-50"
         />
       </div>
-
-      <p
-        ref={knowRef}
-        className={`text-5xl font-bold ${playfair.className} leading-relaxed text-white text-center absolute top-[10vh] capitalize`}
-      >
-        Get to know me
-      </p>
+      <div ref={knowRef} className={`w-full h-screen leading-relaxed absolute flex flex-col gap-[6vh] justify-center items-center py-[12vh]`}>
+        <p
+          className={`text-5xl font-bold ${playfair.className} text-white text-center capitalize`}
+        >
+          Get to know me
+        </p>
+        <KnowMeCards />
+      </div>
     </section>
   );
 }

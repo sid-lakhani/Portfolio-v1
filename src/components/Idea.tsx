@@ -6,8 +6,9 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useRef } from "react";
 import Nav from "./Nav";
 
+gsap.registerPlugin(ScrollTrigger);
+
 export default function Idea() {
-  gsap.registerPlugin(ScrollTrigger);
   const containerRef = useRef<HTMLDivElement>(null);
   const navRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);

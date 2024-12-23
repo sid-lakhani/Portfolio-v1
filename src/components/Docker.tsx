@@ -18,7 +18,6 @@ type Logo = {
   link: string;
 };
 
-// Custom Hook to handle the mouse enter/leave and animations
 function useDockerFunctionality() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
