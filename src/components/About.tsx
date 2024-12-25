@@ -7,6 +7,7 @@ import SplitType from "split-type";
 import { useGSAP } from "@gsap/react";
 import Image from "next/image";
 import KnowMeCards from "./KnowMeCards";
+import Header from "./Header";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -82,6 +83,7 @@ export default function About() {
       ref={bodyRef}
       className="relative flex items-center justify-center h-[100vh] w-full px-10 bg-primary z-50 select-none gap-4"
     >
+      <Header />
       <p
         className={`reveal-type text-4xl font-bold ${poppins.className} leading-relaxed text-white text-center`}
         ref={textRef}

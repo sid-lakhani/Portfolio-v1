@@ -86,7 +86,7 @@ export default function Docker() {
       text: "Twitter",
       link: "https://twitter.com/sidlakhani_",
     },
-    { id: 5, icon: <FileText size={24} />, text: "Resume", link: "/resume" },
+    { id: 5, icon: <FileText size={24} />, text: "Resume", link: "/resume.pdf" },
     { id: 6, icon: <UserPlus size={24} />, text: "Hire me", link: "/contact" },
   ];
 

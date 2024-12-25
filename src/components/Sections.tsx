@@ -6,22 +6,22 @@ export default function Sections() {
     {
       id: 1,
       title: "About",
-      link: "#about",
+      link: "/about",
     },
     {
       id: 2,
       title: "Skills",
-      link: "#skills",
+      link: "/skills",
     },
     {
       id: 3,
       title: "Projects",
-      link: "#projects",
+      link: "/projects",
     },
     {
       id: 4,
       title: "Contact",
-      link: "#contact",
+      link: "/contact",
     },
   ];
 
