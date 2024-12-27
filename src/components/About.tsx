@@ -71,8 +71,8 @@ export default function About() {
         })
         .from(knowRef.current, {
           opacity: 0,
-          y: "-10vh",
-          duration: 10,
+          y: "-100vh",
+          duration: 6,
           ease: "power3.out",
         });
     }
