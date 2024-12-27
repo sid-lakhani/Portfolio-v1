@@ -17,7 +17,7 @@ export default function Header() {
         <SheetContent side={"top"} className="bg-primary">
           <SheetHeader>
             <VisuallyHidden asChild>
-              <SheetTitle>Are you absolutely sure?</SheetTitle>
+              <SheetTitle>Header</SheetTitle>
             </VisuallyHidden>
             <Nav />
           </SheetHeader>
