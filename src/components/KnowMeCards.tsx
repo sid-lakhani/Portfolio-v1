@@ -45,7 +45,7 @@ export default function KnowMeCards() {
                             alt={card.title}
                             width={700}
                             height={700}
-                            className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-105 "
+                            className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-105"
                         />
                     </div>
                 </Link>
