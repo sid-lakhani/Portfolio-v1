@@ -8,17 +8,19 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Mail, MapPin, Phone, Send } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import emailjs from "@emailjs/browser";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function LandingPage() {
+export default function ContactPage() {
   const formRef = useRef<HTMLFormElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const infoRef = useRef<HTMLDivElement>(null);
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   useEffect(() => {
-    // Animate title
     if (titleRef.current) {
       gsap.from(titleRef.current, {
         y: 50,
@@ -28,7 +30,6 @@ export default function LandingPage() {
       });
     }
 
-    // Animate form
     if (formRef.current) {
       gsap.from(formRef.current.children, {
         y: 20,
@@ -39,7 +40,6 @@ export default function LandingPage() {
       });
     }
 
-    // Animate info section
     if (infoRef.current) {
       gsap.from(infoRef.current.children, {
         x: -50,
@@ -54,6 +54,33 @@ export default function LandingPage() {
     }
   }, []);
 
+  const sendEmail = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setLoading(true);
+
+    if (formRef.current) {
+      const formData = new FormData(formRef.current);
+      const formObject = Object.fromEntries(formData.entries());
+
+      formObject.to_name = "Siddhesh Lakhani";
+
+      try {
+        await emailjs.send(
+          process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+          process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+          formObject,
+          process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
+        );
+        setSuccess(true);
+        formRef.current.reset();
+      } catch (error) {
+        console.error("Failed to send email:", error);
+      }
+    }
+
+    setLoading(false);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-primary via-primary-midnight to-primary-dark text-white overflow-hidden">
       <div className="container mx-auto px-4 py-16 max-w-6xl">
@@ -67,6 +94,7 @@ export default function LandingPage() {
         <div className="flex flex-row gap-12">
           <form
             ref={formRef}
+            onSubmit={sendEmail}
             className="space-y-8 bg-black/40 p-6 rounded-lg shadow-lg w-1/2"
           >
             <div>
@@ -78,6 +106,7 @@ export default function LandingPage() {
               </label>
               <Input
                 id="name"
+                name="from_name"
                 className="bg-[#2b2b3e] border-[#444457] text-white"
                 placeholder="Enter your name"
                 required
@@ -92,6 +121,7 @@ export default function LandingPage() {
               </label>
               <Input
                 id="email"
+                name="from_email"
                 type="email"
                 className="bg-[#2b2b3e] border-[#444457] text-white"
                 placeholder="Enter your email"
@@ -107,6 +137,7 @@ export default function LandingPage() {
               </label>
               <Textarea
                 id="message"
+                name="message"
                 className="bg-[#2b2b3e] border-[#444457] text-white h-40"
                 placeholder="Write your message"
                 required
@@ -115,10 +146,16 @@ export default function LandingPage() {
             <Button
               type="submit"
               className="w-full bg-overlay duration-300 transition-colors hover:bg-primary"
+              disabled={loading}
             >
-              Send Message
+              {loading ? "Sending..." : "Send Message"}
               <Send className="ml-2 h-4 w-4" />
             </Button>
+            {success && (
+              <p className="text-green-400 text-center">
+                Message sent successfully!
+              </p>
+            )}
           </form>
 
           <div className="w-1/2">
