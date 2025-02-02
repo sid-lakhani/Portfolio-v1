@@ -13,23 +13,27 @@ export default function SkillsPage() {
   useEffect(() => {
     const tl = gsap.timeline();
 
-    tl.from(titleRef.current, {
-      y: 50,
-      opacity: 0,
-      duration: 1,
-      ease: "power3.out",
-    });
+    if (titleRef.current) {
+      tl.from(titleRef.current, {
+        y: 50,
+        opacity: 0,
+        duration: 1,
+        ease: "power3.out",
+      });
+    }
 
-    gsap.from(sectionRef.current.children, {
-      y: 50,
-      opacity: 0,
-      duration: 0.8,
-      stagger: 0.1,
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        start: "top 80%",
-      },
-    });
+    if (sectionRef.current) {
+      gsap.from(sectionRef.current.children, {
+        y: 50,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.1,
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 80%",
+        },
+      });
+    }
   }, []);
 
   return (
