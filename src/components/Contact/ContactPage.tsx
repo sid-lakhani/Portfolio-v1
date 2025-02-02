@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Gristela } from "@/lib/font";
+import { Gristela, poppins } from "@/lib/font";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Mail, MapPin, Phone, Send } from "lucide-react";
@@ -160,7 +160,9 @@ export default function ContactPage() {
 
           <div className="w-1/2">
             <div ref={infoRef} className="space-y-8">
-              <div className="p-6 bg-black/40 rounded-lg shadow-lg">
+              <div
+                className={`p-6 bg-black/40 rounded-lg shadow-lg ${poppins.className}`}
+              >
                 <h2 className="text-2xl font-light mb-4 text-gray-200">
                   Contact Information
                 </h2>
@@ -176,7 +178,9 @@ export default function ContactPage() {
                   </p>
                   <p className="flex items-center">
                     <Phone className="mr-3 h-5 w-5 text-blue-400" />
-                    <span className="text-gray-300">+91 7021969223</span>
+                    <Link href="tel:+917021969223" className="text-gray-300">
+                      +91 7021969223
+                    </Link>
                   </p>
                   <p className="flex items-center">
                     <MapPin className="mr-3 h-5 w-5 text-blue-400" />
@@ -184,7 +188,9 @@ export default function ContactPage() {
                   </p>
                 </div>
               </div>
-              <div className="p-6 bg-black/40 rounded-lg shadow-lg">
+              <div
+                className={`p-6 bg-black/40 rounded-lg shadow-lg ${poppins.className}`}
+              >
                 <h2 className="text-2xl font-light mb-4 text-gray-200">
                   Connect
                 </h2>
