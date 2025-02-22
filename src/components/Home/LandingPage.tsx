@@ -5,7 +5,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
 import { useRef } from "react";
-import { NavHome } from "./Nav";
+import { NavHome } from "../Nav";
 
 gsap.registerPlugin(ScrollTrigger);
 

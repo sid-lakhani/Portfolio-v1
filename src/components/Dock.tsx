@@ -18,7 +18,7 @@ type Logo = {
   link: string;
 };
 
-function useDockerFunctionality() {
+function useDockFunctionality() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
 
@@ -57,9 +57,9 @@ function useDockerFunctionality() {
   return { hoveredIndex, containerRef, handleMouseEnter, handleMouseLeave };
 }
 
-export default function Docker() {
+export default function Dock() {
   const { hoveredIndex, containerRef, handleMouseEnter, handleMouseLeave } =
-    useDockerFunctionality();
+    useDockFunctionality();
 
   const logos: Logo[] = [
     {

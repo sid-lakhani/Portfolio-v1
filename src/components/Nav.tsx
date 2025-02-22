@@ -1,8 +1,8 @@
 import React from "react";
-import Docker from "./Docker";
 import { Froles } from "@/lib/font";
 import Sections from "./Sections";
 import Link from "next/link";
+import Dock from "./Dock";
 
 export default function Nav() {
   return (
@@ -13,7 +13,7 @@ export default function Nav() {
         Siddhesh Lakhani
       </Link>
       <Sections />
-      <Docker />
+      <Dock />
     </div>
   );
 }
@@ -26,7 +26,7 @@ export function NavHome() {
       >
         Siddhesh Lakhani
       </h1>
-      <Docker />
+      <Dock />
     </div>
   );
 }

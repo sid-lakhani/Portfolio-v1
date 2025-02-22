@@ -6,8 +6,8 @@ import { useEffect, useRef } from "react";
 import SplitType from "split-type";
 import { useGSAP } from "@gsap/react";
 import Image from "next/image";
+import Header from "../Header";
 import KnowMeCards from "./KnowMeCards";
-import Header from "./Header";
 
 gsap.registerPlugin(ScrollTrigger);
 
