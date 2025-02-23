@@ -16,16 +16,16 @@ export default function About() {
   const bodyRef = useRef<HTMLDivElement>(null);
   const imgRef = useRef<HTMLImageElement>(null);
   const knowRef = useRef<HTMLParagraphElement>(null);
-  
+
   useGSAP(() => {
     if (textRef.current) {
       const split = new SplitType(textRef.current, { types: "words" });
 
       const tl = gsap.timeline({
         scrollTrigger: {
-          trigger: bodyRef.current, 
-          start: "top top", 
-          end: "+=100%", 
+          trigger: bodyRef.current,
+          start: "top top",
+          end: "+=100%",
           scrub: true,
           pin: true,
           markers: false,
@@ -40,7 +40,7 @@ export default function About() {
         {
           opacity: 1,
           duration: 2,
-          stagger: 0.8, 
+          stagger: 0.8,
         }
       )
         .to(
@@ -111,7 +111,10 @@ export default function About() {
           className="absolute top-10 z-50"
         />
       </div>
-      <div ref={knowRef} className={`w-full h-screen leading-relaxed absolute flex flex-col gap-[6vh] justify-center items-center py-[12vh]`}>
+      <div
+        ref={knowRef}
+        className={`w-full h-screen leading-relaxed absolute flex flex-col gap-[6vh] justify-center items-center py-[12vh]`}
+      >
         <p
           className={`text-5xl font-bold ${playfair.className} text-white text-center capitalize`}
         >

@@ -1,5 +1,4 @@
 "use client";
-import { Chiro, Froles, Gristela, playfair, poppins } from "@/lib/font";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -9,7 +8,7 @@ import { NavHome } from "../Nav";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function LandingPage() {
+export default function HeroSection() {
   const containerRef = useRef<HTMLDivElement>(null);
   const vidRef = useRef<HTMLVideoElement>(null);
   const imgRef = useRef<HTMLImageElement>(null);
@@ -57,13 +56,9 @@ export default function LandingPage() {
       },
     });
 
-    scrollTL1
-      .to(
-        imgRef.current,
-        {
-          scale: 1.3,
-        },
-      );
+    scrollTL1.to(imgRef.current, {
+      scale: 1.3,
+    });
 
     const scrollTL2 = gsap.timeline({
       scrollTrigger: {

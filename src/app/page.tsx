@@ -1,16 +1,27 @@
+"use client"; 
+import { useState, useEffect } from "react";
 import About from "@/components/Home/About";
 import Idea from "@/components/Home/Idea";
-import LandingPage from "@/components/Home/LandingPage";
 import { SmoothScrollWrapper } from "@/components/SmoothScrollWrapper";
+import HeroSection from "@/components/Home/HeroSection";
 
-export default async function Home() {
-  await new Promise((resolve) => setTimeout(resolve, 5000));
+export default function Home() {
+  const [showContent, setShowContent] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setShowContent(true), 2000);
+    return () => clearTimeout(timer); // Cleanup in case of unmount
+  }, []);
 
   return (
     <SmoothScrollWrapper>
-      <LandingPage />
-      <Idea />
-      <About />
+      <HeroSection />
+      {showContent && (
+        <>
+          <Idea />
+          <About />
+        </>
+      )}
     </SmoothScrollWrapper>
   );
 }
