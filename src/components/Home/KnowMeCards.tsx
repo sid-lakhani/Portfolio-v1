@@ -7,22 +7,22 @@ export default function KnowMeCards() {
     const cards = [
         {
             title: "About Me",
-            img: "/about.png", 
+            img: "/about.webp", 
             link: "/about" 
         },
         {
             title: "Projects",
-            img: "/projects.png",
+            img: "/projects.webp",
             link: "/projects" 
         },
         {
             title: "Skills",
-            img: "/skills.png",
+            img: "/skills.webp",
             link: "/skills" 
         },
         {
             title: "Contact",
-            img: "/contact.png",
+            img: "/contact.webp",
             link: "/contact"
         },
     ];
