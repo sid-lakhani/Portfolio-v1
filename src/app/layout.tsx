@@ -20,9 +20,7 @@ export default async function RootLayout({
   await new Promise((resolve) => setTimeout(resolve, 2000));
   return (
     <html lang="en">
-      <head>
-        <script defer src="http://localhost:3000/script.js" data-website-id="f013fdf1-1588-439c-bec8-b73c8bb9c792"></script>
-      </head>
+      <head><script defer src="http://localhost:3000/script.js" data-website-id="f013fdf1-1588-439c-bec8-b73c8bb9c792"></script></head>
       <body className={`${inter.className}`} suppressHydrationWarning>
         {children}
       </body>
